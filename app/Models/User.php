@@ -6,18 +6,43 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
+
+    public function roles()
+    {
+        return $this->belongsTo('App\Models\Role');
+    }
+
+    public function feedbacks()
+    {
+        return $this->hasMany('App\Models\Feedback');
+    }
+
+    public function faculties()
+    {
+        return $this->belongsTo('App\Models\Faculty');
+    }
+
+    public function notifications()
+    {
+        return $this->hasManyThrough('App\Models\Feedback', 'App\Models\Notification');
+    }
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
+
+    protected $primaryKey = 'user_id';
+    // protected $guard = 'user';
+
     protected $fillable = [
-        'name', 'email', 'password',
+        'user_id', 'email', 'password',
     ];
 
     /**
@@ -35,6 +60,14 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'birth_date' => 'date',
     ];
+
+    public function generateToken()
+    {
+        $this->api_token = Str::random(60);
+        $this->save();
+
+        return $this->api_token;
+    }
 }
