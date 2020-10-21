@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\APIControllers\UserAPI\Auth\UserLoginAPI;
 use App\Http\Controllers\APIControllers\AdminAPI\Auth\AdminLoginAPI;
 
+use Illuminate\Support\Facades\DB;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes

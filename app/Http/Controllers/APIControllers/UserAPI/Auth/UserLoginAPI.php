@@ -35,9 +35,17 @@ class UserLoginAPI extends Controller
             $user->generateToken();
 
             return response()->json([
-                'data' => $user->toArray(),
+                'id' => $request->user_id,
+                'role_id' => $user->role_id,
+                'api_token' => $user->api_token,
+                'success' => true,
             ]);
         }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'Invalid ID or Password',
+        ]);
 
         return $this->sendFailedLoginResponse($request);
     }
@@ -51,6 +59,8 @@ class UserLoginAPI extends Controller
             $user->save();
         }
 
-        return response()->json(['data' => 'User logged out.'], 200);
+        return response()->json([
+            'success' => true,
+        ], 200);
     }
 }
