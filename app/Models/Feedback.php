@@ -30,4 +30,8 @@ class Feedback extends Model
     {
         return $this->hasMany('App\Models\Role');
     }
+
+    public function attachment(){
+        return $this->file();
+    }
 }

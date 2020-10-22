@@ -15,13 +15,13 @@ class CreateNotificationsTable extends Migration
     {
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
-            $table->string('feedback_id');
+            $table->unsignedBigInteger('feedback_id');
             $table->string('content');
             $table->timestamp('send_time');
             $table->boolean('isClicked');
             $table->timestamps();
 
-            $table->foreign('feedback_id')->references('feedback_id')->on('feedbacks');
+            $table->foreign('feedback_id')->references('id')->on('feedbacks');
         });
     }
 
