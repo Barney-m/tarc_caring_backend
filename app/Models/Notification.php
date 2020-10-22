@@ -9,6 +9,8 @@ class Notification extends Model
 {
     use HasFactory;
 
+    protected $table = 'notifications';
+
     public function feedbacks()
     {
         return $this->belongsTo('App\Models\Feedback');

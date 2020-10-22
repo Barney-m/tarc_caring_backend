@@ -16,6 +16,9 @@ class CreateFeedbacksTable extends Migration
         Schema::create('feedbacks', function (Blueprint $table) {
             $table->string('feedback_id')->primary();
             $table->unsignedBigInteger('feedbackType_id');
+            $table->string('choice');
+            $table->string('comment');
+            $table->string('attachment')->nullable();
             $table->string('creator_id');
             $table->string('handler_id');
             $table->boolean('anonymous');
@@ -25,7 +28,7 @@ class CreateFeedbacksTable extends Migration
             $table->timestamp('dismiss_date', 0)->nullable();
 
             $table->foreign('feedbackType_id')->references('id')->on('feedback_types');
-            $table->foreign('creator_id')->references('user_id')->on('users');
+            $table->foreign('creator_id')->references('user_id')->on('users')->nullable();
             $table->foreign('handler_id')->references('user_id')->on('users');
         });
     }

@@ -9,6 +9,8 @@ class Feedback extends Model
 {
     use HasFactory;
 
+    protected $table = 'feedbacks';
+
     public function creators()
     {
         return $this->belongsTo('App\Models\User', 'creator_id');

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\APIControllers\UserAPI\Auth\UserLoginAPI;
 use App\Http\Controllers\APIControllers\AdminAPI\Auth\AdminLoginAPI;
+use App\Http\Controllers\APIControllers\UserAPI\FeedbackAPIController;
 
 use Illuminate\Support\Facades\DB;
 
@@ -26,6 +27,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::prefix('/user')->group(function(){
     Route::post('/login', [UserLoginAPI::class, 'login']);
     Route::post('/logout', [UserLoginAPI::class, 'logout']);
+
+    Route::group(['middleware' => 'auth:api'], function() {
+        //Feedbacks
+        Route::get('/feedbacks', [FeedbackAPIController::class, 'index']);
+    });
 });
 
 Route::prefix('/admin')->group(function() {

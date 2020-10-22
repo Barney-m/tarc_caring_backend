@@ -9,6 +9,8 @@ class FeedbackType extends Model
 {
     use HasFactory;
 
+    protected $table = 'feedback_types';
+
     public function feedbacks()
     {
         return $this->hasMany('App\Models\Feedback');

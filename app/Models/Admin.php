@@ -11,6 +11,8 @@ class Admin extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    protected $table = 'admins';
+
 
     public function roles()
     {
