@@ -16,12 +16,13 @@ class CreateFeedbacksTable extends Migration
         Schema::create('feedbacks', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('feedbackType_id');
-            $table->string('choice');
+            $table->string('choice')->nullable();
             $table->string('comment');
             $table->string('attachment')->nullable();
-            $table->string('creator_id');
-            $table->string('handler_id');
-            $table->boolean('anonymous');
+            $table->string('creator_id')->nullable();
+            $table->string('handler_id')->nullable();
+            $table->boolean('anonymous')->nullable();
+            $table->unsignedTinyInteger('priority');
             $table->string('status');
             $table->timestamps();
             $table->timestamp('approved_date', 0)->nullable();

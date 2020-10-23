@@ -24,7 +24,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-primary shadow-sm">
             <div class="container">
                 <a class="navbar-brand text-white" href="{{ url('/') }}">
-                    {{ config('app.name', 'TARC Caring') }}
+                    {{ 'TARC Caring' }}
                 </a>
                 <button class="navbar-toggler text-white" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon text-white"></span>
@@ -77,23 +77,23 @@
                     <nav class="navbar navbar-expand navbar-dark bg-info flex-md-column flex-row align-items-start py-2">
                         <div class="collapse navbar-collapse ">
                             <ul class="flex-md-column flex-row navbar-nav w-100 justify-content-between">
-                                <li class="nav-item">
-                                    <a class="nav-link pl-0 text-nowrap text-white" href="#"><i class="fa fa-bullseye fa-fw"></i> <span class="font-weight-bold">Brand</span></a>
+                            <li class="nav-item pt-2">
+                                    <a class="nav-link pl-0 text-nowrap text-white" href="{{ route('admin.home') }}"><i class="fa fa-bullseye fa-fw"></i> <span class="d-none d-md-inline @if(Route::is('admin.home')) {{'font-weight-bold'}} @endif">Home</span></a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link pl-0 text-white" href="#"><i class="fa fa-book fa-fw"></i> <span class="d-none d-md-inline">Link</span></a>
+                                <li class="nav-item pt-2">
+                                    <a class="nav-link pl-0 text-nowrap text-white" href="{{ route('admin.register.management') }}"><i class="fa fa-bullseye fa-fw"></i> <span class="d-none d-md-inline @if(Route::is('admin.register.management')) {{'font-weight-bold'}} @endif">Register Management Account</span></a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link pl-0 text-white" href="#"><i class="fa fa-cog fa-fw"></i> <span class="d-none d-md-inline">Link</span></a>
+                                <li class="nav-item pt-2">
+                                    <a class="nav-link pl-0 text-white" href="{{ route('admin.manage.management') }}"><i class="fa fa-book fa-fw"></i> <span class="d-none d-md-inline @if(Route::is('admin.manage.management')) {{'font-weight-bold'}} @endif">Manage Management Account</span></a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link pl-0 text-white" href="#"><i class="fa fa-heart codeply fa-fw"></i> <span class="d-none d-md-inline">Codeply</span></a>
+                                <li class="nav-item pt-2">
+                                    <a class="nav-link pl-0 text-white" href="{{ route('admin.report.sentiment') }}"><i class="fa fa-cog fa-fw"></i> <span class="d-none d-md-inline @if(Route::is('admin.report.sentiment')) {{'font-weight-bold'}} @endif">Feedback Sentiment Report</span></a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link pl-0 text-white" href="#"><i class="fa fa-star codeply fa-fw"></i> <span class="d-none d-md-inline">Link</span></a>
+                                <li class="nav-item pt-2">
+                                    <a class="nav-link pl-0 text-white" href="{{ route('admin.report.made') }}"><i class="fa fa-heart codeply fa-fw"></i> <span class="d-none d-md-inline @if(Route::is('admin.report.made')) {{'font-weight-bold'}} @endif">Feedback Made Report</span></a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link pl-0 text-white" href="#"><i class="fa fa-star fa-fw"></i> <span class="d-none d-md-inline">Link</span></a>
+                                <li class="nav-item pt-2">
+                                    <a class="nav-link pl-0 text-white" href="{{ route('admin.report.result') }}"><i class="fa fa-star codeply fa-fw"></i> <span class="d-none d-md-inline @if(Route::is('admin.report.result')) {{'font-weight-bold'}} @endif">Feedback Result Report</span></a>
                                 </li>
                             </ul>
                         </div>

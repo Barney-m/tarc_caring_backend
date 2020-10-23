@@ -10,6 +10,11 @@ use App\Http\Controllers\AdminControllers\Auth\AdminResetPasswordController;
 use App\Http\Controllers\AdminControllers\Auth\AdminForgotPasswordController;
 use App\Http\Controllers\AdminControllers\Auth\AdminRegisterController;
 use App\Http\Controllers\AdminControllers\Auth\AdminVerificationController;
+use App\Http\Controllers\AdminControllers\RegisterManagementController;
+use App\Http\Controllers\AdminControllers\ManageManagementController;
+use App\Http\Controllers\AdminControllers\SentimentReportController;
+use App\Http\Controllers\AdminControllers\MadeReportController;
+use App\Http\Controllers\AdminControllers\ResultReportController;
 
 use App\Http\Controllers\UserControllers\Auth\LoginController;
 use App\Http\Controllers\UserControllers\Auth\ConfirmPasswordController;
@@ -18,6 +23,8 @@ use App\Http\Controllers\UserControllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\UserControllers\Auth\RegisterController;
 use App\Http\Controllers\UserControllers\Auth\VerificationController;
 use App\Http\Controllers\UserControllers\HomeController;
+use GrahamCampbell\ResultType\Result;
+use Illuminate\Database\Console\Migrations\ResetCommand;
 
 /*
 |--------------------------------------------------------------------------
@@ -94,4 +101,11 @@ Route::prefix('/admin')->group(function(){
     Route::get('/email/verify', [AdminVerificationController::class, 'show'])->name('admin.verification.notice');
     Route::get('/email/verify/{id}/{token}', [AdminVerificationController::class, 'verify'])->name('admin.verification.verify');
     Route::post('/password/confirm', [AdminVerificationController::class, 'resend'])->name('admin.verification.resend');
+
+    Route::get('/register_management', [RegisterManagementController::class, 'show'])->name('admin.register.management');
+    Route::get('/manage_management', [ManageManagementController::class, 'show'])->name('admin.manage.management');
+
+    Route::get('/report/sentiment', [SentimentReportController::class, 'show'])->name('admin.report.sentiment');
+    Route::get('/report/made', [MadeReportController::class, 'show'])->name('admin.report.made');
+    Route::get('/report/result', [ResultReportController::class, 'show'])->name('admin.report.result');
 });

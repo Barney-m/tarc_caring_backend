@@ -44,9 +44,6 @@
                     @else
                         <a href="{{ route('user.login') }}" class="text-2xl text-white underline">Login</a>
                         <span class="ml-4 text-2xl text-white">|</span>
-                        @if (Route::has('user.register'))
-                            <a href="{{ route('user.register') }}" class="ml-4 text-2xl text-white underline">Register</a>
-                        @endif
                     @endif
                 </div>
             @endif

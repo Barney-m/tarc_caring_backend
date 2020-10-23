@@ -9,6 +9,7 @@ use App\Models\Faculty;
 use App\Models\User;
 use App\Models\FeedbackType;
 use App\Models\Admin;
+use App\Models\Feedback;
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,6 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->seedUser();
         $this->seedFeedbackType();
         $this->seedAdmin();
+        $this->seedFeedback();
     }
 
     private function seedRole(){
@@ -249,6 +251,67 @@ class DatabaseSeeder extends Seeder
             'username' => 'admin2',
             'password' => Hash::make('abc123'),
             'role_id' => '7',
+        ])->save();
+    }
+
+    private function seedFeedback(){
+        Feedback::create([
+            'feedbackType_id' => '1',
+            'choice' => 'Block B',
+            'comment' => 'Comment 1',
+            'attachment' => 'default.png',
+            'creator_id' => '19WMR09572',
+            'anonymous' => true,
+            'priority' => 1,
+            'status' => 'pending',
+        ])->save();
+
+        Feedback::create([
+            'feedbackType_id' => '2',
+            'choice' => 'Canteen 1',
+            'comment' => 'Comment 2',
+            'attachment' => 'default.png',
+            'creator_id' => '19WMR09572',
+            'anonymous' => false,
+            'priority' => 2,
+            'status' => 'pending',
+        ])->save();
+
+        Feedback::create([
+            'feedbackType_id' => '3',
+            'choice' => 'Lecture 1',
+            'comment' => 'Comment 3',
+            'attachment' => 'default.png',
+            'creator_id' => '19WMR09572',
+            'handler_id' => 's123456',
+            'anonymous' => true,
+            'priority' => 3,
+            'status' => 'approved',
+            'approved_date' => '2020-10-23 08:31:06',
+        ])->save();
+
+        Feedback::create([
+            'feedbackType_id' => '3',
+            'choice' => 'Lecture 1',
+            'comment' => 'Comment 5',
+            'attachment' => 'default.png',
+            'creator_id' => '19WMR09572',
+            'handler_id' => 's123456',
+            'anonymous' => true,
+            'priority' => 3,
+            'status' => 'urgent',
+            'approved_date' => '2020-10-23 08:31:06',
+        ])->save();
+
+        Feedback::create([
+            'feedbackType_id' => '4',
+            'comment' => 'Comment 4',
+            'creator_id' => '19WMR09572',
+            'handler_id' => 's123456',
+            'anonymous' => true,
+            'priority' => 4,
+            'status' => 'dismissed',
+            'dismiss_date' => '2020-10-23 08:31:06',
         ])->save();
     }
 }

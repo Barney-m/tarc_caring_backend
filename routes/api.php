@@ -31,6 +31,19 @@ Route::prefix('/user')->group(function(){
     Route::group(['middleware' => 'auth:api'], function() {
         //Feedbacks
         Route::get('/feedbacks', [FeedbackAPIController::class, 'index']);
+        Route::get('/feedbacks/facilities', [FeedbackAPIController::class, 'facilities']);
+        Route::get('/feedbacks/foods', [FeedbackAPIController::class, 'foods']);
+        Route::get('/feedbacks/educations', [FeedbackAPIController::class, 'educations']);
+        Route::get('/feedbacks/services', [FeedbackAPIController::class, 'services']);
+        Route::get('/feedbacks/approved', [FeedbackAPIController::class, 'approved']);
+        Route::get('/feedbacks/urgent', [FeedbackAPIController::class, 'urgent']);
+        Route::get('/feedbacks/history', [FeedbackAPIController::class, 'history']);
+        Route::get('/feedbacks/history/facilities', [FeedbackAPIController::class, 'facilitiesHistory']);
+        Route::get('/feedbacks/history/foods', [FeedbackAPIController::class, 'foodsHistory']);
+        Route::get('/feedbacks/history/educations', [FeedbackAPIController::class, 'educationsHistory']);
+        Route::get('/feedbacks/history/services', [FeedbackAPIController::class, 'servicesHistory']);
+        Route::get('/feedbacks/user_history/{id?}', [FeedbackAPIController::class, 'userHistory']);
+        Route::get('/feedbacks/{priority?}', [FeedbackAPIController::class, 'index']);
     });
 });
 
