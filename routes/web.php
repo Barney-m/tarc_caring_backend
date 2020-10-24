@@ -15,6 +15,7 @@ use App\Http\Controllers\AdminControllers\ManageManagementController;
 use App\Http\Controllers\AdminControllers\SentimentReportController;
 use App\Http\Controllers\AdminControllers\MadeReportController;
 use App\Http\Controllers\AdminControllers\ResultReportController;
+use App\Http\Controllers\AdminControllers\Charts\FeedbackSentimentChartController;
 
 use App\Http\Controllers\UserControllers\Auth\LoginController;
 use App\Http\Controllers\UserControllers\Auth\ConfirmPasswordController;
@@ -49,7 +50,7 @@ Route::redirect('/home', '/user/home');
 Route::redirect('/user', '/user/home');
 Route::prefix('/user')->group(function(){
     Route::get('/home', [HomeController::class, 'index'])->name('user.home');
-
+    Route::get('chart/sentimentChart', [FeedbackSentimentChartController::class, 'index']);
     //User Login
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('user.login');
     Route::post('/login', [LoginController::class, 'login'])->name('user.login.submit');
