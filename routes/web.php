@@ -104,7 +104,7 @@ Route::prefix('/admin')->group(function(){
     Route::post('/password/confirm', [AdminVerificationController::class, 'resend'])->name('admin.verification.resend');
 
     Route::get('/register_management', [RegisterManagementController::class, 'show'])->name('admin.register.management');
-    Route::get('/manage_management', [ManageManagementController::class, 'show'])->name('admin.manage.management');
+    Route::get('/manage_management', [ManageManagementController::class, 'index'])->name('admin.manage.management');
 
     Route::get('/report/sentiment', [SentimentReportController::class, 'show'])->name('admin.report.sentiment');
     Route::get('/report/made', [MadeReportController::class, 'show'])->name('admin.report.made');

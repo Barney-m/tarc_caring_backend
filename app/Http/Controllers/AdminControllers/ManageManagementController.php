@@ -4,6 +4,8 @@ namespace App\Http\Controllers\AdminControllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
+use Yajra\Datatables\Facades\Datatables;
 
 class ManageManagementController extends Controller
 {
@@ -12,8 +14,9 @@ class ManageManagementController extends Controller
         $this->middleware('auth:admin');
     }
 
-    public function show()
-    {
-        return view('admin.manage_management');
+    public function index(Request $request){
+        $datas = User::where('role_id', 5)->get();
+
+        return view('admin.manage_management', ['datas' => $datas]);
     }
 }

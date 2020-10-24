@@ -32,6 +32,6 @@ TARC Caring is a mobile-based feedback system to provide a more easy way to **_m
 4. ```php artisan key:generate```
 5. ```php artisan migrate```
 6. ```php artisan db:seed```
-7. ```php artisan serve```
+7. ```php artisan serve --host 0.0.0.0```
 
 The link to [TARC Caring Front-End](https://github.com/Barney-m/tarc_caring).

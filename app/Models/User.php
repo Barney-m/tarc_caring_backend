@@ -63,6 +63,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'birth_date' => 'date',
+        'user_id' => 'string',
     ];
 
     public function generateToken()
