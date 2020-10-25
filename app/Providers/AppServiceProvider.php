@@ -30,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
             \App\Charts\AdminCharts\FeedbackResultChart::class,
             \App\Charts\AdminCharts\TotalUserChart::class,
             \App\Charts\AdminCharts\TotalFeedbackChart::class,
+            \App\Charts\AdminCharts\PriorityChart::class,
         ]);
     }
 }

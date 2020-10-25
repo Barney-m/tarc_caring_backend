@@ -23,7 +23,7 @@
                     ]
                 },
                 hooks: new ChartisanHooks()
-                    .colors(['#ED4E4E', '#D87340', '#78DF66', '#6686DF'])
+                    .colors(['#ED4E4E', '#4E8FED', '#E8EE62', '#78DF66'])
                     .responsive()
                     .beginAtZero()
                     .legend({ position: 'bottom' })

@@ -13,11 +13,11 @@
                                 el: '#chart',
                                 url: 'http://127.0.0.1:8000/api/chart/total_user_chart',
                                 hooks: new ChartisanHooks()
-                                    .colors(['#ED4E4E', '#D87340', '#78DF66', '#6686DF'])
+                                    .colors(['#ED4E4E', '#4E8FED', '#E8EE62', '#78DF66'])
                                     .responsive()
                                     .beginAtZero()
                                     .legend({ position: 'bottom' })
-                                    .title('Current Total User')
+                                    .title('Current Total Users')
                                     .datasets('bar')
                             })
                             </script>
@@ -35,11 +35,11 @@
                                 el: '#chart2',
                                 url: 'http://127.0.0.1:8000/api/chart/total_feedback_chart',
                                 hooks: new ChartisanHooks()
-                                    .colors(['#ED4E4E', '#D87340'])
+                                    .colors(['#ED4E4E', '#4E8FED', '#E8EE62', '#78DF66'])
                                     .responsive()
                                     .beginAtZero()
                                     .legend({ position: 'bottom' })
-                                    .title('Feedback Sentiment Report in')
+                                    .title('Total Feedbacks')
                                     .datasets('line')
                             })
                         </script>
@@ -59,14 +59,14 @@
                         <script>
                             const chart3 = new Chartisan({
                                 el: '#chart3',
-                                url: 'http://127.0.0.1:8000/api/chart/feedback_result_chart',
+                                url: 'http://127.0.0.1:8000/api/chart/priority_chart',
                                 hooks: new ChartisanHooks()
-                                    .colors(['#ED4E4E', '#D87340'])
+                                    .colors(['#ED4E4E', '#4E8FED', '#E8EE62', '#78DF66', '#000FF'])
                                     .responsive()
                                     .beginAtZero()
                                     .legend({ position: 'bottom' })
                                     .title('Feedback Sentiment Report in')
-                                    .datasets('bar')
+                                    .datasets([{ type: 'line', fill: false}, 'bar'])
                             })
                         </script>
                     </div>
