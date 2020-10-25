@@ -28,6 +28,8 @@ class AppServiceProvider extends ServiceProvider
             \App\Charts\AdminCharts\FeedbackSentimentChart::class,
             \App\Charts\AdminCharts\FeedbackMadeChart::class,
             \App\Charts\AdminCharts\FeedbackResultChart::class,
+            \App\Charts\AdminCharts\TotalUserChart::class,
+            \App\Charts\AdminCharts\TotalFeedbackChart::class,
         ]);
     }
 }

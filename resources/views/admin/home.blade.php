@@ -11,15 +11,14 @@
                             <script>
                             const chart1 = new Chartisan({
                                 el: '#chart',
-                                url: 'http://127.0.0.1:8000/api/chart/feedback_sentiment_chart',
+                                url: 'http://127.0.0.1:8000/api/chart/total_user_chart',
                                 hooks: new ChartisanHooks()
                                     .colors(['#ED4E4E', '#D87340', '#78DF66', '#6686DF'])
                                     .responsive()
                                     .beginAtZero()
                                     .legend({ position: 'bottom' })
-                                    .title('Feedback Sentiment Report in')
+                                    .title('Current Total User')
                                     .datasets('bar')
-
                             })
                             </script>
                     </div>
@@ -34,14 +33,14 @@
                         <script>
                             const chart2 = new Chartisan({
                                 el: '#chart2',
-                                url: 'http://127.0.0.1:8000/api/chart/feedback_made_chart',
+                                url: 'http://127.0.0.1:8000/api/chart/total_feedback_chart',
                                 hooks: new ChartisanHooks()
                                     .colors(['#ED4E4E', '#D87340'])
                                     .responsive()
                                     .beginAtZero()
                                     .legend({ position: 'bottom' })
                                     .title('Feedback Sentiment Report in')
-                                    .datasets('bar')
+                                    .datasets('line')
                             })
                         </script>
                     </div>

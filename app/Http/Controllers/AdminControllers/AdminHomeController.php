@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\AdminControllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 
 
 class AdminHomeController extends Controller
@@ -22,8 +23,10 @@ class AdminHomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
-    {
+    public function index(){
+
+
+
         return view('admin.home');
     }
 }

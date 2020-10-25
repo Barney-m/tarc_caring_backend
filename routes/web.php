@@ -105,8 +105,10 @@ Route::prefix('/admin')->group(function(){
 
     Route::get('/register_management', [RegisterManagementController::class, 'show'])->name('admin.register.management');
     Route::get('/manage_management', [ManageManagementController::class, 'index'])->name('admin.manage.management');
+    Route::get('/manage_management/{id?}', [ManageManagementController::class, 'details'])->name('admin.manage.details');
+    Route::put('/manage_management', [ManageManagementController::class, 'edit'])->name('admin.details.submit');
 
-    Route::get('/report/sentiment', [SentimentReportController::class, 'show'])->name('admin.report.sentiment');
+    Route::get('/report/sentiment', [SentimentReportController::class, 'index'])->name('admin.report.sentiment');
     Route::get('/report/made', [MadeReportController::class, 'show'])->name('admin.report.made');
     Route::get('/report/result', [ResultReportController::class, 'show'])->name('admin.report.result');
 });

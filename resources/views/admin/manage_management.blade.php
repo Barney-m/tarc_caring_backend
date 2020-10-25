@@ -1,7 +1,11 @@
 @extends('layouts.adminapp')
 
 @section('content')
-
+@if($message ?? '' != null)
+    <div class="text-center">
+        <h3 class="text-success">{{$message ?? ''}}</h3>
+    </div>
+@endif
 <table class="table" id="table">
     <thead>
         <tr>
@@ -16,19 +20,16 @@
     <tbody>
     <?php $index = 0;?>
     @foreach($datas as $data)
-        <tr class="{{ $index + 1 }}">
-            <td>{{ $index + 1 }}</td>
-            <td>{{ $data->user_id }}</td>
-            <td>{{ $data->name }}</td>
-            <td>{{ $data->email }}</td>
-            <td>{{ $data->mobile_no }}</td>
-            <td>{{ $data->status }}</td>
-            <td><button class="edit-modal btn btn-info" href>
+        <tr class="{{ $index + 1 }} text-center">
+            <td class="align-middle">{{ $index + 1 }}</td>
+            <td class="align-middle">{{ $data->user_id }}</td>
+            <td class="align-middle">{{ $data->name }}</td>
+            <td class="align-middle">{{ $data->email }}</td>
+            <td class="align-middle">{{ $data->mobile_no }}</td>
+            <td class="align-middle">{{ $data->status }}</td>
+        <td><a href="{{ route('admin.manage.details', ['id' => $data->user_id]) }}"><button class="edit-modal btn btn-info">
                     <span class="glyphicon glyphicon-edit"></span> Edit
-                </button>
-                <button class="delete-modal btn btn-danger" data-info="{{$index}},{{$data->user_id}},{{$data->name}},{{$data->email}},{{$data->mobile_no}},{{$data->status}}">
-                    <span class="glyphicon glyphicon-trash"></span> Delete
-                </button></td>
+                </button></a>
         </tr>
     @endforeach
     </tbody>

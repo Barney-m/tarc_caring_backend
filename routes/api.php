@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\APIControllers\UserAPI\Auth\UserLoginAPI;
 use App\Http\Controllers\APIControllers\AdminAPI\Auth\AdminLoginAPI;
 use App\Http\Controllers\APIControllers\UserAPI\FeedbackAPIController;
+use App\Http\Controllers\AdminControllers\ManageManagementController;
 
 use Illuminate\Support\Facades\DB;
 
@@ -50,4 +51,10 @@ Route::prefix('/user')->group(function(){
 Route::prefix('/admin')->group(function() {
     Route::post('/login', [AdminLoginAPI::class, 'login']);
     Route::post('/logout', [AdminLoginAPI::class, 'logout']);
+
+
+    Route::group(['middleware' => 'auth:api'], function() {
+        Route::get('/manage_management/{id?}', [ManageManagementController::class, 'details']);
+    });
+
 });
