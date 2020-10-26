@@ -37,21 +37,21 @@
     </head>
     <body class="antialiased">
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0 bg">
-            @if (Route::has('user.login'))
-                <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-                    @auth
-                        <a href="{{ route('user.home') }}" class="text-2xl text-white underline">Home</a>
-                    @else
-                        <a href="{{ route('user.login') }}" class="text-2xl text-white underline">Login</a>
-                        <span class="ml-4 text-2xl text-white">|</span>
-                    @endif
-                </div>
-            @endif
+
 
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-                <div class="text-2xl">
+                <div class="text-2xl text-gray-900">
                     <h1>TARC Caring</h1>
                 </div>
+                @if (Route::has('user.login'))
+                <div class="hidden px-6 py-4 sm:block text-center">
+                    @auth
+                        <a href="{{ route('user.home') }}" class="text-2xl"><button class="text-2xl text-white" style="background-color: #4299e1;padding-top:0.75rem;padding-bottom:0.75rem;padding-left:1rem;padding-right:1rem;border-radius: 0.375rem;cursor: pointer;">Home</button></a>
+                    @else
+                        <a href="{{ route('user.login') }}" class="text-2xl"><button class="text-2xl text-white" style="background-color: #4299e1;padding-top:0.75rem;padding-bottom:0.75rem;padding-left:1rem;padding-right:1rem;border-radius: 0.375rem;cursor: pointer;">Login</button></a>
+                    @endif
+                </div>
+                @endif
             </div>
         </div>
     </body>

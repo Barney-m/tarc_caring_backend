@@ -42,8 +42,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/admin/home', [AdminHomeController::class, 'adminHome'])->name('admin.test')->middleware('privilege');
-
 // Route::get('/home', [App\Http\Controllers\UserControllers\HomeController::class, 'index'])->name('user.home');
 Route::redirect('/login', '/user/home');
 Route::redirect('/home', '/user/home');
@@ -103,12 +101,13 @@ Route::prefix('/admin')->group(function(){
     Route::get('/email/verify/{id}/{token}', [AdminVerificationController::class, 'verify'])->name('admin.verification.verify');
     Route::post('/password/confirm', [AdminVerificationController::class, 'resend'])->name('admin.verification.resend');
 
-    Route::get('/register_management', [RegisterManagementController::class, 'show'])->name('admin.register.management');
+    Route::get('/register_management', [RegisterManagementController::class, 'index'])->name('admin.register.management');
+    Route::post('/register_management', [RegisterManagementController::class, 'create'])->name('admin.management.submit');
     Route::get('/manage_management', [ManageManagementController::class, 'index'])->name('admin.manage.management');
     Route::get('/manage_management/{id?}', [ManageManagementController::class, 'details'])->name('admin.manage.details');
     Route::put('/manage_management', [ManageManagementController::class, 'edit'])->name('admin.details.submit');
 
     Route::get('/report/sentiment', [SentimentReportController::class, 'index'])->name('admin.report.sentiment');
-    Route::get('/report/made', [MadeReportController::class, 'show'])->name('admin.report.made');
-    Route::get('/report/result', [ResultReportController::class, 'show'])->name('admin.report.result');
+    Route::get('/report/made', [MadeReportController::class, 'index'])->name('admin.report.made');
+    Route::get('/report/result', [ResultReportController::class, 'index'])->name('admin.report.result');
 });

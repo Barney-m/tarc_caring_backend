@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <div class="card border border-rounded border-secondary">
                 <div class="card-header">{{ __('Dashboard') }}
                     <div class="card-body">
@@ -25,7 +25,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-8">
             <div class="card border border-rounded border-secondary">
                 <div class="card-header">{{ __('Dashboard') }}
                     <div class="card-body">
@@ -65,7 +65,7 @@
                                     .responsive()
                                     .beginAtZero()
                                     .legend({ position: 'bottom' })
-                                    .title('Feedback Sentiment Report in')
+                                    .title('Priority')
                                     .datasets([{ type: 'line', fill: false}, 'bar'])
                             })
                         </script>

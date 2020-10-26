@@ -47,7 +47,7 @@ class Admin extends Authenticatable
      * @var array
      */
     protected $casts = [
-
+        'username' => 'string',
     ];
 
     public function generateToken()

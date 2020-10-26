@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Charts\AdminCharts\FeedbackSentimentChart;
-use Charts;
 
 class FeedbackSentimentChartController extends Controller
 {

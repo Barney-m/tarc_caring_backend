@@ -132,6 +132,24 @@ class DatabaseSeeder extends Seeder
         ])->save();
 
         User::create([
+            'user_id' => '19WMR09562',
+            'email' => 'pohreng1999@gmail',
+            'password' => Hash::make('abc123456'),
+            'name' => 'Cheah Poh Reng',
+            'gender' => 'M',
+            'nric_no' => '000101-10-1235',
+            'birth_date' => '01/01/2000',
+            'mobile_no' => '15155',
+            'home_address' => 'test',
+            'correspondence_address' => 'test',
+            'session_join' => '201905',
+            'status' => 'Active',
+            'uuid' => NULL,
+            'role_id' => 2,
+            'faculty_id' => 'FOCS',
+        ])->save();
+
+        User::create([
             'user_id' => 'p12345',
             'email' => 'cheahpr-wm17@student.tarc.edu.my',
             'password' => Hash::make('abc123456'),
@@ -139,6 +157,24 @@ class DatabaseSeeder extends Seeder
             'gender' => 'M',
             'nric_no' => '000101-10-1234',
             'birth_date' => '01/01/2000',
+            'mobile_no' => '011-1234567',
+            'home_address' => 'test',
+            'correspondence_address' => 'test',
+            'session_join' => NULL,
+            'status' => 'Active',
+            'uuid' => NULL,
+            'role_id' => 3,
+            'faculty_id' => 'FOCS',
+        ])->save();
+
+        User::create([
+            'user_id' => 'p11111',
+            'email' => 'kenshencu99@gmail.com',
+            'password' => Hash::make('abc123456'),
+            'name' => 'Test',
+            'gender' => 'M',
+            'nric_no' => '000101-10-1236',
+            'birth_date' => '01/01/1996',
             'mobile_no' => '011-1234567',
             'home_address' => 'test',
             'correspondence_address' => 'test',
@@ -182,7 +218,6 @@ class DatabaseSeeder extends Seeder
             'status' => 'Active',
             'uuid' => NULL,
             'role_id' => 5,
-            'faculty_id' => 'BUR',
         ])->save();
 
         // User::create([
@@ -304,9 +339,96 @@ class DatabaseSeeder extends Seeder
         ])->save();
 
         Feedback::create([
+            'feedbackType_id' => '2',
+            'choice' => 'Lecture 1',
+            'comment' => 'Comment 5',
+            'attachment' => 'default.png',
+            'creator_id' => 'p12345',
+            'handler_id' => 's123456',
+            'anonymous' => false,
+            'priority' => 5,
+            'status' => 'approved',
+            'approved_date' => '2020-10-23 08:31:06',
+        ])->save();
+
+        Feedback::create([
+            'feedbackType_id' => '4',
+            'choice' => 'Lecture 1',
+            'comment' => 'Comment 5',
+            'attachment' => 'default.png',
+            'creator_id' => 'p456789',
+            'handler_id' => 's123456',
+            'anonymous' => true,
+            'priority' => 1,
+            'status' => 'urgent',
+            'approved_date' => '2020-10-23 08:31:06',
+        ])->save();
+
+        Feedback::create([
+            'feedbackType_id' => '1',
+            'choice' => 'Lecture 1',
+            'comment' => 'Comment 5',
+            'attachment' => 'default.png',
+            'creator_id' => 'p12345',
+            'handler_id' => 's123456',
+            'anonymous' => true,
+            'priority' => 2,
+            'status' => 'approved',
+            'approved_date' => '2020-10-23 08:31:06',
+        ])->save();
+
+        Feedback::create([
+            'feedbackType_id' => '1',
+            'choice' => 'Lecture 1',
+            'comment' => 'Comment 5',
+            'attachment' => 'default.png',
+            'creator_id' => 'p12345',
+            'handler_id' => 's123456',
+            'anonymous' => true,
+            'priority' => 2,
+            'status' => 'solved',
+            'approved_date' => '2020-10-23 08:31:06',
+        ])->save();
+
+        Feedback::create([
+            'feedbackType_id' => '1',
+            'choice' => 'Lecture 1',
+            'comment' => 'Comment 5',
+            'attachment' => 'default.png',
+            'creator_id' => 'p456789',
+            'handler_id' => 's123456',
+            'anonymous' => true,
+            'priority' => 4,
+            'status' => 'solved',
+            'approved_date' => '2020-10-23 08:31:06',
+        ])->save();
+
+        Feedback::create([
             'feedbackType_id' => '4',
             'comment' => 'Comment 4',
             'creator_id' => '19WMR09572',
+            'handler_id' => 's123456',
+            'anonymous' => true,
+            'priority' => 4,
+            'status' => 'dismissed',
+            'dismiss_date' => '2020-10-23 08:31:06',
+        ])->save();
+
+        Feedback::create([
+            'feedbackType_id' => '2',
+            'comment' => 'Comment 4',
+            'creator_id' => 'p12345',
+            'handler_id' => 's123456',
+            'anonymous' => true,
+            'priority' => 4,
+            'status' => 'dismissed',
+            'dismiss_date' => '2020-10-23 08:31:06',
+        ])->save();
+
+        Feedback::create([
+            'feedbackType_id' => '2',
+            'comment' => 'Comment 4',
+            'creator_id' => 'p456789',
             'handler_id' => 's123456',
             'anonymous' => true,
             'priority' => 4,

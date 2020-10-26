@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('home_address')->nullable();
             $table->string('correspondence_address')->nullable();
             $table->string('session_join')->nullable();
-            $table->string('status');
+            $table->string('status')->default('Active');
             $table->uuid('uuid')->nullable();
             $table->unsignedBigInteger('role_id');
             $table->string('faculty_id')->nullable();
