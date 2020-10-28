@@ -7,6 +7,7 @@ use App\Models\Feedback;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\User;
+Use Sentiment\Analyzer;
 
 class FeedbackAPIController extends Controller
 {
@@ -198,6 +199,58 @@ class FeedbackAPIController extends Controller
                     ->where('status', 'Active')
                     ->where('faculty_id', $request->faculty)
                     ->get();
+        }
+    }
+
+    public function submit(Request $request){
+        $priority;
+        if($request->comment != null){
+            $analyzer = new Analyzer();
+            $dictionary = ['rubbish' => -1.5, 'cb' => -1.5, 'lapsap' => -1.5, 'shit' => -1.5];
+            $analyzer->updateLexicon($dictionary);
+            $score = $analyzer->getSentiment($request->comment);
+            $result = $score['compound'] * 100;
+            if($result > 60){
+                $priority = 5;
+            }
+            else if($result > 20){
+                $priority = 4;
+            }
+            else if($result <= 20 && $result >= -20){
+                $priority = 3;
+            }
+            else if($result < -20 && $result >= -60){
+                $priority = 2;
+                return $result;
+            }
+            else{
+                $priority = 1;
+            }
+        }
+
+        if($request->feedback_type == 1){
+
+        }
+        else if($request->feedback_type == 2){
+
+        }
+        else if($request->feedback_type == 3){
+
+            return Feedback::create([
+                'feedbackType_id' => $request->feedback_type,
+                'choice' => $request->lecturer_id,
+                'comment' => $request->comment,
+                'creator_id' => $request->user_id,
+                'anonymous' => ($request->anonymous == true) ? 1 : 0,
+                'priority' => $priority,
+                'status' => 'pending',
+            ]);
+        }
+        else if($request->feedback_type == 4){
+
+        }
+        else{
+
         }
     }
 }

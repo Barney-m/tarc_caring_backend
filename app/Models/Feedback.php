@@ -11,6 +11,10 @@ class Feedback extends Model
 
     protected $table = 'feedbacks';
 
+    protected $fillable = [
+        'feedbackType_id', 'choice', 'comment', 'attachment', 'creator_id', 'handler_id', 'anonymous', 'priority', 'status', 'approved_date', 'dismiss_date',
+    ];
+
     public function creators()
     {
         return $this->belongsTo('App\Models\User', 'creator_id');
