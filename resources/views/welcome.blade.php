@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>TARC Caring</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -20,7 +20,7 @@
             }
 
             .bg{
-                background-image: url("https://i.pinimg.com/originals/3b/8a/d2/3b8ad2c7b1be2caf24321c852103598a.jpg");
+                background-image: url("https://i.stack.imgur.com/90nGa.jpg");
                 background-position: center;
                 background-repeat: no-repeat;
                 background-size: cover;
@@ -40,7 +40,7 @@
 
 
             <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-                <div class="text-2xl text-gray-900">
+                <div class="text-2xl text-white">
                     <h1>TARC Caring</h1>
                 </div>
                 @if (Route::has('user.login'))
@@ -48,7 +48,7 @@
                     @auth
                         <a href="{{ route('user.home') }}" class="text-2xl"><button class="text-2xl text-white" style="background-color: #4299e1;padding-top:0.75rem;padding-bottom:0.75rem;padding-left:1rem;padding-right:1rem;border-radius: 0.375rem;cursor: pointer;">Home</button></a>
                     @else
-                        <a href="{{ route('user.login') }}" class="text-2xl"><button class="text-2xl text-white" style="background-color: #4299e1;padding-top:0.75rem;padding-bottom:0.75rem;padding-left:1rem;padding-right:1rem;border-radius: 0.375rem;cursor: pointer;">Login</button></a>
+                        <a href="{{ route('user.login') }}" class="text-2xl"><button class="text-2xl text-white" style="background-color: #5C5364;padding-top:0.75rem;padding-bottom:0.75rem;padding-left:1rem;padding-right:1rem;border-radius: 0.375rem;cursor: pointer;">Login</button></a>
                     @endif
                 </div>
                 @endif

@@ -45,6 +45,7 @@ Route::prefix('/user')->group(function(){
         Route::get('/feedbacks/history/services', [FeedbackAPIController::class, 'servicesHistory']);
         Route::get('/feedbacks/user_history/{id?}', [FeedbackAPIController::class, 'userHistory']);
         Route::get('/feedbacks/{priority?}', [FeedbackAPIController::class, 'index']);
+        Route::get('/lecturer/{faculty?}', [FeedbackAPIController::class, 'lecturer']);
     });
 });
 

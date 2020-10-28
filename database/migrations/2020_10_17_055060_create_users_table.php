@@ -33,6 +33,7 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->string('api_token', 80)->unique()->nullable()->default(null);
+            $table->string('device_token')->nullable();
 
             $table->foreign('role_id')->references('id')->on('roles');
             $table->foreign('faculty_id')->references('faculty_id')->on('faculties');

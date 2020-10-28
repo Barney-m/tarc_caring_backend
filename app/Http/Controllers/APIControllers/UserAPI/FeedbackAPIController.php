@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Feedback;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Models\User;
 
 class FeedbackAPIController extends Controller
 {
@@ -145,6 +146,58 @@ class FeedbackAPIController extends Controller
             return json_encode(array(
                 "message" => 'Unauthenticated.'
             ));
+        }
+    }
+
+    public function feedback_action(Request $request){
+        if($request->action == 'dismiss'){
+            Feedback::find($request->id)
+                ->update([
+                    'status' => 'dismissed',
+                    'dismiss_date' => \Carbon\Carbon::now()->toDateTimeString(),
+                    'handler_id' => $request->user_id,
+                ]);
+        }
+        else if($request->action == 'approve'){
+            Feedback::find($request->id)
+                ->update([
+                    'status' => 'approved',
+                    'approved_date' => \Carbon\Carbon::now()->toDateTimeString(),
+                    'handler_id' => $request->user_id,
+                ]);
+        }
+        else if($request->action == 'urgent'){
+            Feedback::find($request->id)
+                ->update([
+                    'status' => 'urgent',
+                    'approved_date' => \Carbon\Carbon::now()->toDateTimeString(),
+                    'handler_id' => $request->user_id,
+                ]);
+        }
+        else{
+            return response()->json([
+                'message' => 'Invalid Action.',
+                'success' => false
+            ]);
+        }
+
+        return response()->json([
+            'message' => 'Feedback Updated.',
+            'success' => false
+        ]);
+    }
+
+    public function lecturer(Request $request){
+        if($request->faculty == 'All'){
+            return User::where('role_id', '3')
+                    ->where('status', 'Active')
+                    ->get();
+        }
+        else{
+            return User::where('role_id', 3)
+                    ->where('status', 'Active')
+                    ->where('faculty_id', $request->faculty)
+                    ->get();
         }
     }
 }
