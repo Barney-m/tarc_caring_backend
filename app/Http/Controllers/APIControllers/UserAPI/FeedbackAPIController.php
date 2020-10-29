@@ -5,9 +5,10 @@ namespace App\Http\Controllers\APIControllers\UserAPI;
 use App\Http\Controllers\Controller;
 use App\Models\Feedback;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use App\Models\User;
 Use Sentiment\Analyzer;
+use Symfony\Component\HttpFoundation\File\File;
 
 class FeedbackAPIController extends Controller
 {
@@ -128,16 +129,14 @@ class FeedbackAPIController extends Controller
     public function userHistory(Request $request){
         if($request->id != null){
             if($request->feedback != null){
-                return Feedback::where('status', 'pending')
-                    ->where('feedbackType_id', intval($request->feedback))
+                return Feedback::where('feedbackType_id', intval($request->feedback))
                     ->where('creator_id', $request->id)
                     ->join('feedback_types', 'feedbacks.feedbackType_id', '=', 'feedback_types.id')
                     ->select('feedbacks.*', 'feedback_types.type')
                     ->get();
             }
             else{
-                return Feedback::where('status', 'pending')
-                    ->where('creator_id', $request->id)
+                return Feedback::where('creator_id', $request->id)
                     ->join('feedback_types', 'feedbacks.feedbackType_id', '=', 'feedback_types.id')
                     ->select('feedbacks.*', 'feedback_types.type')
                     ->get();
@@ -203,6 +202,24 @@ class FeedbackAPIController extends Controller
     }
 
     public function submit(Request $request){
+        if($request->attachment != null){
+            $image_data = base64_decode(preg_replace('#^data:image/\w+;base64,#i', '', $request->attachment));
+            //grab a new tmp file
+            $tmpFilePath=sys_get_temp_dir().'/'.uniqid();
+            //write the image to it
+            file_put_contents($tmpFilePath, $image_data);
+            //move it.
+            //give it a name
+            $f = finfo_open();
+            $mime_type = finfo_buffer($f, $image_data, FILEINFO_MIME_TYPE);
+            $imageName = Str::random(20).'.'.str_replace("image/","",$mime_type);
+            //if using Symfony\Component\HttpFoundation\File\File;
+            //get an instance of File from the temp file and call ->move on it
+            $tmpFile=new File($tmpFilePath);
+            $tmpFile->move(public_path('images/image_attachment/'), $imageName);
+        }
+
+
         $priority;
         if($request->comment != null){
             $analyzer = new Analyzer();
@@ -229,14 +246,35 @@ class FeedbackAPIController extends Controller
         }
 
         if($request->feedback_type == 1){
+            Feedback::create([
+                'feedbackType_id' => $request->feedback_type,
+                'choice' => $request->block,
+                'comment' => $request->comment,
+                'attachment' => $imageName,
+                'creator_id' => $request->user_id,
+                'anonymous' => ($request->anonymous == true) ? 1 : 0,
+                'priority' => $priority,
+                'status' => 'pending',
+            ]);
 
+            return response()->json(['success' => true]);
         }
         else if($request->feedback_type == 2){
+            Feedback::create([
+                'feedbackType_id' => $request->feedback_type,
+                'choice' => $request->canteen,
+                'comment' => $request->comment,
+                'attachment' => $imageName,
+                'creator_id' => $request->user_id,
+                'anonymous' => ($request->anonymous == true) ? 1 : 0,
+                'priority' => $priority,
+                'status' => 'pending',
+            ]);
 
+            return response()->json(['success' => true]);
         }
         else if($request->feedback_type == 3){
-
-            return Feedback::create([
+            Feedback::create([
                 'feedbackType_id' => $request->feedback_type,
                 'choice' => $request->lecturer_id,
                 'comment' => $request->comment,
@@ -245,12 +283,24 @@ class FeedbackAPIController extends Controller
                 'priority' => $priority,
                 'status' => 'pending',
             ]);
+
+            return response()->json(['success' => true]);
         }
         else if($request->feedback_type == 4){
+            Feedback::create([
+                'feedbackType_id' => $request->feedback_type,
+                'choice' => $request->service,
+                'comment' => $request->comment,
+                'creator_id' => $request->user_id,
+                'anonymous' => ($request->anonymous == true) ? 1 : 0,
+                'priority' => $priority,
+                'status' => 'pending',
+            ]);
 
+            return response()->json(['success' => true]);
         }
         else{
-
+            return response()->json(['success' => false]);
         }
     }
 }
