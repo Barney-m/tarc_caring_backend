@@ -30,9 +30,12 @@ Route::prefix('/user')->group(function(){
     Route::post('/logout', [UserLoginAPI::class, 'logout']);
     Route::post('/submit', [FeedbackAPIController::class, 'submit']);
 
+    Route::post('/manage/action', [FeedbackAPIController::class, 'feedback_action']);
+
     Route::group(['middleware' => 'auth:api'], function() {
         //Feedbacks
         Route::get('/feedbacks', [FeedbackAPIController::class, 'index']);
+        Route::get('/feedbacks/details/{id?}', [FeedbackAPIController::class, 'feedback_details']);
         Route::get('/feedbacks/facilities', [FeedbackAPIController::class, 'facilities']);
         Route::get('/feedbacks/foods', [FeedbackAPIController::class, 'foods']);
         Route::get('/feedbacks/educations', [FeedbackAPIController::class, 'educations']);
@@ -47,6 +50,7 @@ Route::prefix('/user')->group(function(){
         Route::get('/feedbacks/user_history/{id?}', [FeedbackAPIController::class, 'userHistory']);
         Route::get('/feedbacks/{priority?}', [FeedbackAPIController::class, 'index']);
         Route::get('/lecturer/{faculty?}', [FeedbackAPIController::class, 'lecturer']);
+        Route::get('/tokenValidation', [UserLoginAPI::class, 'validateToken']);
     });
 });
 

@@ -151,7 +151,7 @@ class FeedbackAPIController extends Controller
 
     public function feedback_action(Request $request){
         if($request->action == 'dismiss'){
-            Feedback::find($request->id)
+            Feedback::where('id',$request->id)
                 ->update([
                     'status' => 'dismissed',
                     'dismiss_date' => \Carbon\Carbon::now()->toDateTimeString(),
@@ -159,7 +159,7 @@ class FeedbackAPIController extends Controller
                 ]);
         }
         else if($request->action == 'approve'){
-            Feedback::find($request->id)
+            Feedback::where('id',$request->id)
                 ->update([
                     'status' => 'approved',
                     'approved_date' => \Carbon\Carbon::now()->toDateTimeString(),
@@ -167,12 +167,16 @@ class FeedbackAPIController extends Controller
                 ]);
         }
         else if($request->action == 'urgent'){
-            Feedback::find($request->id)
+            Feedback::where('id',$request->id)
                 ->update([
                     'status' => 'urgent',
                     'approved_date' => \Carbon\Carbon::now()->toDateTimeString(),
                     'handler_id' => $request->user_id,
                 ]);
+        }
+        else if($request->action == 'recall'){
+            Feedback::where('id',$request->id)
+                ->update(['status' => 'recalled']);
         }
         else{
             return response()->json([
@@ -198,6 +202,19 @@ class FeedbackAPIController extends Controller
                     ->where('status', 'Active')
                     ->where('faculty_id', $request->faculty)
                     ->get();
+        }
+    }
+
+    public function feedback_details(Request $request){
+        if($request->id != null){
+            return Feedback::where('id', $request->id)
+                    ->join('users', 'feedbacks.creator_id', '=', 'user_id')
+                    ->get();
+        }
+        else {
+            return response()->json([
+                'error' => 'Feedback Not Found',
+            ]);
         }
     }
 
@@ -246,32 +263,62 @@ class FeedbackAPIController extends Controller
         }
 
         if($request->feedback_type == 1){
-            Feedback::create([
-                'feedbackType_id' => $request->feedback_type,
-                'choice' => $request->block,
-                'comment' => $request->comment,
-                'attachment' => $imageName,
-                'creator_id' => $request->user_id,
-                'anonymous' => ($request->anonymous == true) ? 1 : 0,
-                'priority' => $priority,
-                'status' => 'pending',
-            ]);
+            if($request->attachment != null){
+                Feedback::create([
+                    'feedbackType_id' => $request->feedback_type,
+                    'choice' => $request->action,
+                    'comment' => $request->comment,
+                    'attachment' => $imageName,
+                    'creator_id' => $request->user_id,
+                    'anonymous' => ($request->anonymous == true) ? 1 : 0,
+                    'priority' => $priority,
+                    'status' => 'pending',
+                ]);
 
-            return response()->json(['success' => true]);
+                return response()->json(['success' => true]);
+            }
+            else{
+                Feedback::create([
+                    'feedbackType_id' => $request->feedback_type,
+                    'choice' => $request->action,
+                    'comment' => $request->comment,
+                    'creator_id' => $request->user_id,
+                    'anonymous' => ($request->anonymous == true) ? 1 : 0,
+                    'priority' => $priority,
+                    'status' => 'pending',
+                ]);
+
+                return response()->json(['success' => true]);
+            }
         }
         else if($request->feedback_type == 2){
-            Feedback::create([
-                'feedbackType_id' => $request->feedback_type,
-                'choice' => $request->canteen,
-                'comment' => $request->comment,
-                'attachment' => $imageName,
-                'creator_id' => $request->user_id,
-                'anonymous' => ($request->anonymous == true) ? 1 : 0,
-                'priority' => $priority,
-                'status' => 'pending',
-            ]);
+            if($request->attachment != null){
+                Feedback::create([
+                    'feedbackType_id' => $request->feedback_type,
+                    'choice' => $request->action,
+                    'comment' => $request->comment,
+                    'attachment' => $imageName,
+                    'creator_id' => $request->user_id,
+                    'anonymous' => ($request->anonymous == true) ? 1 : 0,
+                    'priority' => $priority,
+                    'status' => 'pending',
+                ]);
 
-            return response()->json(['success' => true]);
+                return response()->json(['success' => true]);
+            }
+            else{
+                Feedback::create([
+                    'feedbackType_id' => $request->feedback_type,
+                    'choice' => $request->action,
+                    'comment' => $request->comment,
+                    'creator_id' => $request->user_id,
+                    'anonymous' => ($request->anonymous == true) ? 1 : 0,
+                    'priority' => $priority,
+                    'status' => 'pending',
+                ]);
+
+                return response()->json(['success' => true]);
+            }
         }
         else if($request->feedback_type == 3){
             Feedback::create([

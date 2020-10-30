@@ -63,4 +63,10 @@ class UserLoginAPI extends Controller
             'success' => true,
         ], 200);
     }
+
+    public function validateToken(Request $request){
+        return response()->json([
+            'success' => true,
+        ], 200);
+    }
 }
