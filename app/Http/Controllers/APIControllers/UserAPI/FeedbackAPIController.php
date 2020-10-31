@@ -251,7 +251,7 @@ class FeedbackAPIController extends Controller
             //give it a name
             $f = finfo_open();
             $mime_type = finfo_buffer($f, $image_data, FILEINFO_MIME_TYPE);
-            $imageName = Str::random(20).'.'.str_replace("image/","",$mime_type);
+            $imageName = Str::random(50).'.'.str_replace("image/","",$mime_type);
             //if using Symfony\Component\HttpFoundation\File\File;
             //get an instance of File from the temp file and call ->move on it
             $tmpFile=new File($tmpFilePath);
