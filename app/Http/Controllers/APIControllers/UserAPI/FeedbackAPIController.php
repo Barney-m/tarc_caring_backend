@@ -191,6 +191,15 @@ class FeedbackAPIController extends Controller
                 'success' => true,
             ]);
         }
+        else if($request->action == 'solve'){
+            Feedback::where('id',$request->id)
+                ->update(['status' => 'solved']);
+
+            return response()->json([
+                'message' => 'Feedback solved successfully.',
+                'success' => true,
+            ]);
+        }
         else{
             return response()->json([
                 'message' => 'Invalid Action.',
