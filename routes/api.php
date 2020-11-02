@@ -37,13 +37,8 @@ Route::prefix('/user')->group(function(){
         Route::get('/feedbacks/user_history/{id?}', [FeedbackAPIController::class, 'userHistory']);
 
         Route::get('/feedbacks/details/{id?}', [FeedbackAPIController::class, 'feedback_details']);
-        Route::get('/feedbacks/accepted/{action?}', [FeedbackAPIController::class, 'accepted']);
-        Route::get('/feedbacks/history', [FeedbackAPIController::class, 'history']);
-        Route::get('/feedbacks/history/facilities', [FeedbackAPIController::class, 'facilitiesHistory']);
-        Route::get('/feedbacks/history/foods', [FeedbackAPIController::class, 'foodsHistory']);
-        Route::get('/feedbacks/history/educations', [FeedbackAPIController::class, 'educationsHistory']);
-        Route::get('/feedbacks/history/services', [FeedbackAPIController::class, 'servicesHistory']);
-
+        Route::get('/feedbacks/accepted/{action?}/{id?}', [FeedbackAPIController::class, 'accepted']);
+        Route::get('/feedbacks/history/{type?}/{id?}', [FeedbackAPIController::class, 'history']);
         Route::get('/feedbacks/{priority?}', [FeedbackAPIController::class, 'index']);
         Route::get('/lecturer/{faculty?}', [FeedbackAPIController::class, 'lecturer']);
         Route::get('/tokenValidation', [UserLoginAPI::class, 'validateToken']);

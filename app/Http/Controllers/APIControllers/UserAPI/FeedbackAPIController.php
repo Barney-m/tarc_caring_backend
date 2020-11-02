@@ -41,19 +41,28 @@ class FeedbackAPIController extends Controller
     }
 
     public function accepted(Request $request){
-        if($request->action == 'approved'){
-            return Feedback::where('feedbacks.status', 'approved')
-                    ->join('feedback_types', 'feedbacks.feedbackType_id', '=', 'feedback_types.id')
-                    ->join('users', 'feedbacks.creator_id', '=', 'users.user_id')
-                    ->select('feedbacks.*', 'users.name', 'users.image','feedback_types.type')
-                    ->get();
-        }
-        else if($request->action == 'urgent'){
-            return Feedback::where('feedbacks.status', 'urgent')
-                    ->join('feedback_types', 'feedbacks.feedbackType_id', '=', 'feedback_types.id')
-                    ->join('users', 'feedbacks.creator_id', '=', 'users.user_id')
-                    ->select('feedbacks.*', 'users.name', 'users.image','feedback_types.type')
-                    ->get();
+        if($request->id != null){
+            if($request->action == 'approved'){
+                return Feedback::where('feedbacks.status', 'approved')
+                        ->where('feedbacks.handler_id', $request->id)
+                        ->join('feedback_types', 'feedbacks.feedbackType_id', '=', 'feedback_types.id')
+                        ->join('users', 'feedbacks.creator_id', '=', 'users.user_id')
+                        ->select('feedbacks.*', 'users.name', 'users.image','feedback_types.type')
+                        ->get();
+            }
+            else if($request->action == 'urgent'){
+                return Feedback::where('feedbacks.status', 'urgent')
+                        ->where('feedbacks.handler_id', $request->id)
+                        ->join('feedback_types', 'feedbacks.feedbackType_id', '=', 'feedback_types.id')
+                        ->join('users', 'feedbacks.creator_id', '=', 'users.user_id')
+                        ->select('feedbacks.*', 'users.name', 'users.image','feedback_types.type')
+                        ->get();
+            }
+            else{
+                return response()->json([
+                    'error' => 'Feedback Not Found.',
+                ]);
+            }
         }
 
         return response()->json([
@@ -61,61 +70,68 @@ class FeedbackAPIController extends Controller
         ]);
     }
 
-    public function history(){
-        return Feedback::where('feedbacks.status', 'solved')
-                ->orWhere('feedbacks.status', 'dismissed')
-                ->join('feedback_types', 'feedbacks.feedbackType_id', '=', 'feedback_types.id')
-                ->join('users', 'feedbacks.creator_id', '=', 'users.user_id')
-                ->select('feedbacks.*', 'users.name', 'users.image','feedback_types.type')
-                ->get();
-    }
-
-    public function facilitiesHistory(){
-        return Feedback::where('feedbackType_id', '1')
+    public function history(Request $request){
+        if($request->id != null){
+            if($request->type == 1){
+                return Feedback::where('feedbackType_id', '1')
                 ->where(function($query){
                     $query->where('feedbacks.status', 'solved')
                         ->orWhere('feedbacks.status', 'dismissed');
                 })
+                ->where('feedbacks.handler_id', $request->id)
                 ->join('feedback_types', 'feedbacks.feedbackType_id', '=', 'feedback_types.id')
                 ->join('users', 'feedbacks.creator_id', '=', 'users.user_id')
                 ->select('feedbacks.*', 'users.name', 'users.image','feedback_types.type')
                 ->get();
-    }
-
-    public function foodsHistory(){
-        return Feedback::where('feedbackType_id', '2')
+            }
+            else if($request->type == 2){
+                return Feedback::where('feedbackType_id', '2')
                 ->where(function($query){
                     $query->where('feedbacks.status', 'solved')
                         ->orWhere('feedbacks.status', 'dismissed');
                 })
+                ->where('feedbacks.handler_id', $request->id)
                 ->join('feedback_types', 'feedbacks.feedbackType_id', '=', 'feedback_types.id')
                 ->join('users', 'feedbacks.creator_id', '=', 'users.user_id')
                 ->select('feedbacks.*', 'users.name', 'users.image','feedback_types.type')
                 ->get();
-    }
-
-    public function educationsHistory(){
-        return Feedback::where('feedbackType_id', '3')
+            }
+            else if($request->type == 3){
+                return Feedback::where('feedbackType_id', '3')
                 ->where(function($query){
                     $query->where('feedbacks.status', 'solved')
                         ->orWhere('feedbacks.status', 'dismissed');
                 })
+                ->where('feedbacks.handler_id', $request->id)
                 ->join('feedback_types', 'feedbacks.feedbackType_id', '=', 'feedback_types.id')
                 ->join('users', 'feedbacks.creator_id', '=', 'users.user_id')
                 ->select('feedbacks.*', 'users.name', 'users.image','feedback_types.type')
                 ->get();
-    }
-
-    public function servicesHistory(){
-        return Feedback::where('feedbackType_id', '4')
+            }
+            else if($request->type == 4){
+                return Feedback::where('feedbackType_id', '4')
                 ->where(function($query){
                     $query->where('feedbacks.status', 'solved')
                         ->orWhere('feedbacks.status', 'dismissed');
                 })
+                ->where('feedbacks.handler_id', $request->id)
                 ->join('feedback_types', 'feedbacks.feedbackType_id', '=', 'feedback_types.id')
                 ->join('users', 'feedbacks.creator_id', '=', 'users.user_id')
                 ->select('feedbacks.*', 'users.name', 'users.image','feedback_types.type')
                 ->get();
+            }
+            else{
+                return Feedback::where('feedbacks.status', 'solved')
+                        ->orWhere('feedbacks.status', 'dismissed')
+                        ->where('feedbacks.handler_id', $request->id)
+                        ->join('feedback_types', 'feedbacks.feedbackType_id', '=', 'feedback_types.id')
+                        ->join('users', 'feedbacks.creator_id', '=', 'users.user_id')
+                        ->select('feedbacks.*', 'users.name', 'users.image','feedback_types.type')
+                        ->get();
+            }
+        }
+
+        return response()->json(['error' => true]);
     }
 
     public function userHistory(Request $request){
