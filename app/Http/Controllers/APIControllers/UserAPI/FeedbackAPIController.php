@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use App\Models\User;
 Use Sentiment\Analyzer;
 use Symfony\Component\HttpFoundation\File\File;
+use Illuminate\Support\Facades\DB;
 
 class FeedbackAPIController extends Controller
 {
@@ -18,25 +19,22 @@ class FeedbackAPIController extends Controller
             if($request->type != 0){
                 return Feedback::where('feedbacks.status', 'pending')
                     ->where('feedbackType_id', intval($request->type))
-                    ->join('users', 'feedbacks.creator_id', '=', 'users.user_id')
                     ->join('feedback_types', 'feedbacks.feedbackType_id', '=', 'feedback_types.id')
-                    ->select('feedbacks.*', 'users.name', 'users.image','feedback_types.type')
+                    ->select('feedbacks.*', 'feedback_types.type')
                     ->get();
             }
             else{
                 return Feedback::where('feedbacks.status', 'pending')
-                        ->join('users', 'creator_id', '=', 'users.user_id')
                         ->join('feedback_types', 'feedbacks.feedbackType_id', '=', 'feedback_types.id')
-                        ->select('feedbacks.*', 'users.name', 'users.image','feedback_types.type')
+                        ->select('feedbacks.*', 'feedback_types.type')
                         ->get();
             }
         }
 
         return Feedback::where('feedbacks.status', 'pending')
                 ->where('priority', $request->priority)
-                ->join('users', 'feedbacks.creator_id', '=', 'users.user_id')
                 ->join('feedback_types', 'feedbacks.feedbackType_id', '=', 'feedback_types.id')
-                ->select('feedbacks.*', 'users.name', 'users.image','feedback_types.type')
+                ->select('feedbacks.*', 'feedback_types.type')
                 ->get();
     }
 
@@ -46,16 +44,14 @@ class FeedbackAPIController extends Controller
                 return Feedback::where('feedbacks.status', 'approved')
                         ->where('feedbacks.handler_id', $request->id)
                         ->join('feedback_types', 'feedbacks.feedbackType_id', '=', 'feedback_types.id')
-                        ->join('users', 'feedbacks.creator_id', '=', 'users.user_id')
-                        ->select('feedbacks.*', 'users.name', 'users.image','feedback_types.type')
+                        ->select('feedbacks.*', 'feedback_types.type')
                         ->get();
             }
             else if($request->action == 'urgent'){
                 return Feedback::where('feedbacks.status', 'urgent')
                         ->where('feedbacks.handler_id', $request->id)
                         ->join('feedback_types', 'feedbacks.feedbackType_id', '=', 'feedback_types.id')
-                        ->join('users', 'feedbacks.creator_id', '=', 'users.user_id')
-                        ->select('feedbacks.*', 'users.name', 'users.image','feedback_types.type')
+                        ->select('feedbacks.*', 'feedback_types.type')
                         ->get();
             }
             else{
@@ -80,8 +76,7 @@ class FeedbackAPIController extends Controller
                 })
                 ->where('feedbacks.handler_id', $request->id)
                 ->join('feedback_types', 'feedbacks.feedbackType_id', '=', 'feedback_types.id')
-                ->join('users', 'feedbacks.creator_id', '=', 'users.user_id')
-                ->select('feedbacks.*', 'users.name', 'users.image','feedback_types.type')
+                ->select('feedbacks.*','feedback_types.type')
                 ->get();
             }
             else if($request->type == 2){
@@ -92,8 +87,7 @@ class FeedbackAPIController extends Controller
                 })
                 ->where('feedbacks.handler_id', $request->id)
                 ->join('feedback_types', 'feedbacks.feedbackType_id', '=', 'feedback_types.id')
-                ->join('users', 'feedbacks.creator_id', '=', 'users.user_id')
-                ->select('feedbacks.*', 'users.name', 'users.image','feedback_types.type')
+                ->select('feedbacks.*', 'feedback_types.type')
                 ->get();
             }
             else if($request->type == 3){
@@ -104,8 +98,7 @@ class FeedbackAPIController extends Controller
                 })
                 ->where('feedbacks.handler_id', $request->id)
                 ->join('feedback_types', 'feedbacks.feedbackType_id', '=', 'feedback_types.id')
-                ->join('users', 'feedbacks.creator_id', '=', 'users.user_id')
-                ->select('feedbacks.*', 'users.name', 'users.image','feedback_types.type')
+                ->select('feedbacks.*', 'feedback_types.type')
                 ->get();
             }
             else if($request->type == 4){
@@ -116,8 +109,7 @@ class FeedbackAPIController extends Controller
                 })
                 ->where('feedbacks.handler_id', $request->id)
                 ->join('feedback_types', 'feedbacks.feedbackType_id', '=', 'feedback_types.id')
-                ->join('users', 'feedbacks.creator_id', '=', 'users.user_id')
-                ->select('feedbacks.*', 'users.name', 'users.image','feedback_types.type')
+                ->select('feedbacks.*', 'feedback_types.type')
                 ->get();
             }
             else{
@@ -125,8 +117,7 @@ class FeedbackAPIController extends Controller
                         ->orWhere('feedbacks.status', 'dismissed')
                         ->where('feedbacks.handler_id', $request->id)
                         ->join('feedback_types', 'feedbacks.feedbackType_id', '=', 'feedback_types.id')
-                        ->join('users', 'feedbacks.creator_id', '=', 'users.user_id')
-                        ->select('feedbacks.*', 'users.name', 'users.image','feedback_types.type')
+                        ->select('feedbacks.*', 'feedback_types.type')
                         ->get();
             }
         }
@@ -140,13 +131,15 @@ class FeedbackAPIController extends Controller
                 return Feedback::where('feedbackType_id', intval($request->feedback))
                     ->where('creator_id', $request->id)
                     ->join('feedback_types', 'feedbacks.feedbackType_id', '=', 'feedback_types.id')
-                    ->select('feedbacks.*', 'feedback_types.type')
+                    ->join('users', 'feedbacks.creator_id', '=', 'users.user_id')
+                    ->select('feedbacks.*', 'users.name', 'users.image','feedback_types.type')
                     ->get();
             }
             else{
                 return Feedback::where('creator_id', $request->id)
                     ->join('feedback_types', 'feedbacks.feedbackType_id', '=', 'feedback_types.id')
-                    ->select('feedbacks.*', 'feedback_types.type')
+                    ->join('users', 'feedbacks.creator_id', '=', 'users.user_id')
+                    ->select('feedbacks.*', 'users.name', 'users.image','feedback_types.type')
                     ->get();
             }
         }
@@ -387,5 +380,19 @@ class FeedbackAPIController extends Controller
         else{
             return response()->json(['success' => false]);
         }
+    }
+
+    public function retrieveUser(Request $request){
+        if($request->id != null){
+            $user = DB::table('users')->select('users.*')->where('users.user_id', $request->id)->first();
+            return response()->json([
+                'user_id' => $user->user_id,
+                'name' => $user->name,
+                'image' => $user->image,
+            ]);
+        }
+        return response()->json([
+            'user_id' => null,
+        ]);
     }
 }

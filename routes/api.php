@@ -34,17 +34,17 @@ Route::prefix('/user')->group(function(){
 
     Route::group(['middleware' => 'auth:api'], function() {
         //Feedbacks
+
         Route::get('/feedbacks/user_history/{id?}', [FeedbackAPIController::class, 'userHistory']);
 
         Route::get('/feedbacks/details/{id?}', [FeedbackAPIController::class, 'feedback_details']);
         Route::get('/feedbacks/accepted/{action?}/{id?}', [FeedbackAPIController::class, 'accepted']);
         Route::get('/feedbacks/history/{type?}/{id?}', [FeedbackAPIController::class, 'history']);
+        Route::get('/feedbacks/user/{id?}',[FeedbackAPIController::class, 'retrieveUser']);
         Route::get('/feedbacks/{priority?}', [FeedbackAPIController::class, 'index']);
         Route::get('/lecturer/{faculty?}', [FeedbackAPIController::class, 'lecturer']);
         Route::get('/tokenValidation', [UserLoginAPI::class, 'validateToken']);
-
         Route::get('/feedbacks/{type?}', [FeedbackAPIController::class, 'index']);
-
     });
 });
 
