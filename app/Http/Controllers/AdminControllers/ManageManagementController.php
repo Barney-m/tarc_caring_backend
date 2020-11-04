@@ -55,8 +55,15 @@ class ManageManagementController extends Controller
         }
 
         if($editName === true || $editMobileNo === true || $editEmail === true || $editStatus === true){
-            $user->save();
-            $message = "Update Successfully";
+            $email = User::where('email', $request->email)->first();
+            if($email == null){
+                $user->save();
+                $message = "Update Successfully";
+            }
+            else{
+                $message = "Email duplicated.";
+                return back()->with(['details' => $user, 'message' => $message]);
+            }
         } else{
             $message = "At least 1 change required.";
             return back()->with(['details' => $user, 'message' => $message]);

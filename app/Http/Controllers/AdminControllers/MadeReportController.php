@@ -119,7 +119,7 @@ class MadeReportController extends Controller
         );
 
         $labels = ['Campus Facilities', 'Canteen Foods', 'Education Quality', 'Service Attitude'];
-
-        return view('admin.made_report', compact('labels', 'students', 'lecturers', 'staffs'));
+        $year = $request->year;
+        return view('admin.made_report', compact('labels', 'students', 'lecturers', 'staffs', 'year'));
     }
 }

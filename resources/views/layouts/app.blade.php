@@ -14,7 +14,7 @@
     <!-- Chartisan -->
     <script src="https://unpkg.com/@chartisan/chartjs@^2.1.0/dist/chartisan_chartjs.umd.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
-
+    <link rel="icon" type="image/png" href="https://d1ujqdpfgkvqfi.cloudfront.net/favicon-generator/htdocs/favicons/2020-10-26/d0ee3599391fe3569ff093bb093058dc.ico.png"/>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">

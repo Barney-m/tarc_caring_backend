@@ -133,7 +133,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'user_id' => '19WMR09562',
-            'email' => 'pohreng1999@gmail',
+            'email' => 'pohreng1999@gmail.com',
             'password' => Hash::make('abc123456'),
             'name' => 'Cheah Poh Reng',
             'gender' => 'M',

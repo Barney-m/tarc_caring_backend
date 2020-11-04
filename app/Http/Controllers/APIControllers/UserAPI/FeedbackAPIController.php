@@ -114,6 +114,7 @@ class FeedbackAPIController extends Controller
             }
             else{
                 return Feedback::where('feedbacks.status', 'solved')
+                        ->where('feedbacks.handler_id', $request->id)
                         ->orWhere('feedbacks.status', 'dismissed')
                         ->where('feedbacks.handler_id', $request->id)
                         ->join('feedback_types', 'feedbacks.feedbackType_id', '=', 'feedback_types.id')

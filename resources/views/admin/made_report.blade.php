@@ -20,7 +20,7 @@
                                     datasets: [
                                         { name: 'Students', values: [{{$students[0]}}, {{$students[1]}}, {{$students[2]}}, {{$students[3]}}] },
                                         { name: 'Lecturers', values: [{{$lecturers[0]}}, {{$lecturers[1]}}, {{$lecturers[2]}}, {{$lecturers[3]}},] },
-                                        { name: 'Services', values: [{{$staffs[0]}}, {{$staffs[1]}}, {{$staffs[2]}}, {{$staffs[3]}},] }
+                                        { name: 'Staffs', values: [{{$staffs[0]}}, {{$staffs[1]}}, {{$staffs[2]}}, {{$staffs[3]}},] }
                                     ]
                                 },
                                 hooks: new ChartisanHooks()
