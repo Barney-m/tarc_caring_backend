@@ -17,10 +17,10 @@ class Feedback extends Model
     ];
 
     protected $casts = [
-        'created_at' => 'datetime:Y-m-d HH:MM:SS',
-        'updated_at' => 'datetime:Y-m-d H:00:00',
-        'approved_date' => 'datetime:Y-m-d H:00:00',
-        'dismiss_date' => 'datetime:Y-m-d H:00:00',
+        'created_at' => 'datetime:Y-m-d H:i:s',
+        'updated_at' => 'datetime:Y-m-d H:i:s',
+        'approved_date' => 'datetime:Y-m-d H:i:s',
+        'dismiss_date' => 'datetime:Y-m-d H:i:s',
     ];
 
     public function creators()

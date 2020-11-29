@@ -14,7 +14,7 @@
     <!-- Chartisan -->
     <script src="https://unpkg.com/@chartisan/chartjs@^2.1.0/dist/chartisan_chartjs.umd.js"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <link rel="icon" type="image/png" href="https://github.com/Barney-m/tarc_caring_backend/blob/master/public/favicon.ico"/>
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/Barney-m/tarc_caring_backend/master/public/favicon.ico"/>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
