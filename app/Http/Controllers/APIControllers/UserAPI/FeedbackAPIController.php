@@ -380,7 +380,7 @@ class FeedbackAPIController extends Controller
         else if($request->feedback_type == 4){
             Feedback::create([
                 'feedbackType_id' => $request->feedback_type,
-                'choice' => $request->service,
+                'choice' => $request->action,
                 'comment' => $request->comment,
                 'creator_id' => $request->user_id,
                 'anonymous' => ($request->anonymous == true) ? 1 : 0,

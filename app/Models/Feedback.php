@@ -10,9 +10,17 @@ class Feedback extends Model
     use HasFactory;
 
     protected $table = 'feedbacks';
+    protected $dateFormat = 'Y-m-d';
 
     protected $fillable = [
         'feedbackType_id', 'choice', 'comment', 'attachment', 'creator_id', 'handler_id', 'anonymous', 'priority', 'status', 'approved_date', 'dismiss_date',
+    ];
+
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d HH:MM:SS',
+        'updated_at' => 'datetime:Y-m-d H:00:00',
+        'approved_date' => 'datetime:Y-m-d H:00:00',
+        'dismiss_date' => 'datetime:Y-m-d H:00:00',
     ];
 
     public function creators()
