@@ -36,7 +36,7 @@
                 <div class="card-body bg-info ml-5">
                 <h2>Total Feedback Solved: <strong>{{$solved[0]}}</strong></h2>
                 <h2>Total Feedback Dismissed: <strong>{{$dismissed[0]}}</strong></h2>
-                <h2>Solving Rate: <strong>@if($solved[0] != 0 || $dismissed[0] != 0){{($solved[0] / ($solved[0] + $dismissed[0])) * 100}}%@else 0% @endif</strong></h2>
+                <h2>Solving Rate: <strong>@if($solved[0] != 0 || $dismissed[0] != 0){{number_format(($solved[0] / ($solved[0] + $dismissed[0])) * 100, 2, '.', ',')}}%@else 0% @endif</strong></h2>
                 </div>
             </div>
         </div>

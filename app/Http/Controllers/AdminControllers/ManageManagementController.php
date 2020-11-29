@@ -40,7 +40,7 @@ class ManageManagementController extends Controller
         }
 
         if($request->mobile_no != null){
-            $ediMobileNo = true;
+            $editMobileNo = true;
             $user->mobile_no = $request->mobile_no;
         }
 
@@ -53,6 +53,7 @@ class ManageManagementController extends Controller
             $editStatus = true;
             $user->status = $request->status;
         }
+
 
         if($editName === true || $editMobileNo === true || $editEmail === true || $editStatus === true){
             $email = User::where('email', $request->email)->first();

@@ -24,7 +24,7 @@
                         </div>
                         <div class="form-group ml-5 mr-5 pl-5 pr-5">
                             <label for="mobile_no" class="h4">Phone No.</label><br/>
-                            <input type="text" id="mobile_no" name="mobile_no" class="form-control border rounded border-secondary form-control-lg"><br/>
+                            <input type="text" id="mobile_no" name="mobile_no" class="form-control border rounded border-secondary form-control-lg" pattern="^(\+?6?01)[0-46-9]-*[0-9]{7,8}$" title="Pleae enter valid phone no."><br/>
                         </div>
                         <div class="form-group ml-5 mr-5 pl-5 pr-5">
                             <label for="email" class="h4">Email</label><br/>

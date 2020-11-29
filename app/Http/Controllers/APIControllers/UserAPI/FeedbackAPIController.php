@@ -21,12 +21,14 @@ class FeedbackAPIController extends Controller
                     ->where('feedbackType_id', intval($request->type))
                     ->join('feedback_types', 'feedbacks.feedbackType_id', '=', 'feedback_types.id')
                     ->select('feedbacks.*', 'feedback_types.type')
+                    ->orderBy('created_at', 'desc')
                     ->get();
             }
             else{
                 return Feedback::where('feedbacks.status', 'pending')
                         ->join('feedback_types', 'feedbacks.feedbackType_id', '=', 'feedback_types.id')
                         ->select('feedbacks.*', 'feedback_types.type')
+                        ->orderBy('created_at', 'desc')
                         ->get();
             }
         }
@@ -35,6 +37,7 @@ class FeedbackAPIController extends Controller
                 ->where('priority', $request->priority)
                 ->join('feedback_types', 'feedbacks.feedbackType_id', '=', 'feedback_types.id')
                 ->select('feedbacks.*', 'feedback_types.type')
+                ->orderBy('created_at', 'desc')
                 ->get();
     }
 
@@ -45,6 +48,7 @@ class FeedbackAPIController extends Controller
                         ->where('feedbacks.handler_id', $request->id)
                         ->join('feedback_types', 'feedbacks.feedbackType_id', '=', 'feedback_types.id')
                         ->select('feedbacks.*', 'feedback_types.type')
+                        ->orderBy('approved_date', 'desc')
                         ->get();
             }
             else if($request->action == 'urgent'){
@@ -52,6 +56,7 @@ class FeedbackAPIController extends Controller
                         ->where('feedbacks.handler_id', $request->id)
                         ->join('feedback_types', 'feedbacks.feedbackType_id', '=', 'feedback_types.id')
                         ->select('feedbacks.*', 'feedback_types.type')
+                        ->orderBy('approved_date', 'desc')
                         ->get();
             }
             else{
@@ -77,6 +82,7 @@ class FeedbackAPIController extends Controller
                 ->where('feedbacks.handler_id', $request->id)
                 ->join('feedback_types', 'feedbacks.feedbackType_id', '=', 'feedback_types.id')
                 ->select('feedbacks.*','feedback_types.type')
+                ->orderBy('updated_at', 'desc')
                 ->get();
             }
             else if($request->type == 2){
@@ -88,6 +94,7 @@ class FeedbackAPIController extends Controller
                 ->where('feedbacks.handler_id', $request->id)
                 ->join('feedback_types', 'feedbacks.feedbackType_id', '=', 'feedback_types.id')
                 ->select('feedbacks.*', 'feedback_types.type')
+                ->orderBy('updated_at', 'desc')
                 ->get();
             }
             else if($request->type == 3){
@@ -99,6 +106,7 @@ class FeedbackAPIController extends Controller
                 ->where('feedbacks.handler_id', $request->id)
                 ->join('feedback_types', 'feedbacks.feedbackType_id', '=', 'feedback_types.id')
                 ->select('feedbacks.*', 'feedback_types.type')
+                ->orderBy('updated_at', 'desc')
                 ->get();
             }
             else if($request->type == 4){
@@ -110,6 +118,7 @@ class FeedbackAPIController extends Controller
                 ->where('feedbacks.handler_id', $request->id)
                 ->join('feedback_types', 'feedbacks.feedbackType_id', '=', 'feedback_types.id')
                 ->select('feedbacks.*', 'feedback_types.type')
+                ->orderBy('updated_at', 'desc')
                 ->get();
             }
             else{
@@ -119,6 +128,7 @@ class FeedbackAPIController extends Controller
                         ->where('feedbacks.handler_id', $request->id)
                         ->join('feedback_types', 'feedbacks.feedbackType_id', '=', 'feedback_types.id')
                         ->select('feedbacks.*', 'feedback_types.type')
+                        ->orderBy('updated_at', 'desc')
                         ->get();
             }
         }
@@ -134,6 +144,7 @@ class FeedbackAPIController extends Controller
                     ->join('feedback_types', 'feedbacks.feedbackType_id', '=', 'feedback_types.id')
                     ->join('users', 'feedbacks.creator_id', '=', 'users.user_id')
                     ->select('feedbacks.*', 'users.name', 'users.image','feedback_types.type')
+                    ->orderBy('created_at', 'desc')
                     ->get();
             }
             else{
@@ -141,6 +152,7 @@ class FeedbackAPIController extends Controller
                     ->join('feedback_types', 'feedbacks.feedbackType_id', '=', 'feedback_types.id')
                     ->join('users', 'feedbacks.creator_id', '=', 'users.user_id')
                     ->select('feedbacks.*', 'users.name', 'users.image','feedback_types.type')
+                    ->orderBy('created_at', 'desc')
                     ->get();
             }
         }
